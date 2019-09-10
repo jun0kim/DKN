@@ -20,7 +20,7 @@ logging
 
 
 ## 2. Dataset
-NYU v2 dataset, our split can be downloaded 
+NYU v2 dataset, our split can be downloaded: http://gofile.me/3G5St/2lFq5R3TL
 
 
 ## 3. Inference
