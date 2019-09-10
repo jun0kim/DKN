@@ -8,30 +8,36 @@ This is the pytorch implementation of our DKN paper (paper link).
 
 ## 1. Requirement
 
-Pytorch 0.2.0
+Pytorch 1.0.0
 
-Cuda 9.0
+Cuda 10.0
 
-Opencv 3.3
+Opencv 3.4
 
-PyInn: https://github.com/szagoruyko/pyinn
+tqdm
 
-
-
-
-
-## 2. Usage
-
-- Depthmap upsampling
-> python DepthUpsampling.py --rgb images/0\_rgb.png --depth images/0\_lr.png --k 3 --d 15 --scale 8 --parameter parameter/Depth8x --output images/result.png
-
-- Noise reduction
-> python NoiseReduction.py --target images/target.png --guidance images/guidance.png --k 3 --d 15 --parameter parameter/Noise --output images/noise_reduction.png
+logging
 
 
+## 2. Dataset
+NYU v2 dataset, our split can be downloaded 
+
+
+## 3. Inference
+
+- DKN
+> python inference.py --rgb images/0\_rgb.png --depth images/0\_lr.png --k 3 --d 15 --scale 8 --parameter parameter/DKN_8x --output images/result_dkn.png --model DKN
+
+- FDKN
+> python inference.py --rgb images/0\_rgb.png --depth images/0\_lr.png --k 3 --d 15 --scale 8 --parameter parameter/FDKN_8x --output images/result_fdkn.png --model FDKN
 
 
 
-## 3. Examples
-**Depthmap Upsampling**![image](https://user-images.githubusercontent.com/5655912/37327511-fa790b50-26d9-11e8-9f34-2f8b8f9438c1.png)
-**Noise Reduction (Flash/No-flash, RGB/NIR)**![image](https://user-images.githubusercontent.com/5655912/37327624-72b3b16a-26da-11e8-9b6f-9c872023fdae.png)
+## 4. Train
+
+- DKN
+> python train.py --k 3 --d 15 --scale 8 --model DKN
+
+- FDKN
+> python train.py --k 3 --d 15 --scale 8 --model FDKN
+
