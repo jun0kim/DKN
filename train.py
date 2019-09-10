@@ -50,7 +50,7 @@ data_transform = transforms.Compose([
     transforms.ToTensor()
 ])
 
-nyu_dataset = NYU_v2_datset(root_dir='../Kernel/datasets', transform=data_transform)
+nyu_dataset = NYU_v2_datset(root_dir='./dataset', transform=data_transform)
 dataloader = torch.utils.data.DataLoader(nyu_dataset, batch_size=1, shuffle=True)
 
 def calc_rmse(a, b, minmax):
@@ -63,7 +63,7 @@ def calc_rmse(a, b, minmax):
     return np.sqrt(np.mean(np.power(a-b,2)))
 
 @torch.no_grad()
-def validate(net, root_dir='../Kernel/datasets'):
+def validate(net, root_dir='./dataset'):
     data_transform = transforms.Compose([
         transforms.ToTensor()
     ])
@@ -85,9 +85,7 @@ def validate(net, root_dir='../Kernel/datasets'):
         
         t.set_description('[validate] rmse: %f' %rmse[:idx+1].mean())
         t.refresh()
-        
     
-
     return rmse
 
 max_epoch = 20
