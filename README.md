@@ -2,7 +2,7 @@
 
 
 # Deformable Kernel Network for Joint Image Filtering
-This is the pytorch implementation of our DKN paper (paper link). 
+This is the pytorch implementation of our DKN [[Paper](https://arxiv.org/abs/1910.08373)] 
 ![image](https://user-images.githubusercontent.com/5655912/37342239-53239644-2707-11e8-85b1-9b25c290d81e.png)
 
 
