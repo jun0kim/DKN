@@ -13,8 +13,8 @@ class NYU_v2_datset(Dataset):
         Args:
             root_dir (string): Directory with all the images.
             scale (float): dataset scale
-            transform (callable, optional): Optional transform to be applied
-                on a sample.
+            train (bool): train or test
+            transform (callable, optional): Optional transform to be applied on a sample.
             
         """
         self.root_dir = root_dir
@@ -29,7 +29,6 @@ class NYU_v2_datset(Dataset):
             self.images = np.load('%s/test_images_v2.npy'%root_dir)
 
     def __len__(self):
-        
         return self.depths.shape[0]
 
     def __getitem__(self, idx):
@@ -38,10 +37,8 @@ class NYU_v2_datset(Dataset):
         
         h, w = depth.shape
         s = self.scale
-        
         target = np.array(Image.fromarray(depth).resize((w//s,h//s),Image.BICUBIC).resize((w, h), Image.BICUBIC))
 
-        
         if self.transform:
             image = self.transform(image).float()
             depth = self.transform(np.expand_dims(depth,2)).float()
@@ -54,8 +51,8 @@ class NYU_v2_datset(Dataset):
         """
         return:
             sample:
-            guidance (np.array float): H x W x tC (t: # of frames, C: channel)
-            target ((np.array float)): H x W
-            gt ((np.array float)): H x W
+            guidance (np.array float): H x W x 3 
+            target ((np.array float)): H x W x 1
+            gt ((np.array float)): H x W x 1
             
         """

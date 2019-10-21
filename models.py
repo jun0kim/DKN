@@ -89,7 +89,6 @@ class DKN(nn.Module):
         # (b*hw, 1, k, k), (b*hw, r, r, 2) => (b*hw, 1, r^2)
         depth_sampled = F.grid_sample(depth_col, coord).view(b*hw, 1, -1)
         
-        
         # (b*w*h, 1, r^2) x (b*w*h, r^2, 1) => (b, 1, h,w)
         out = torch.bmm(depth_sampled, weight).view(b, 1, h,w)
 
@@ -237,7 +236,7 @@ class FDKN(nn.Module):
         # (b*hw, 1, k, k), (b*hw, r, r, 2) => (b*hw, 1, r^2)
         depth_sampled = F.grid_sample(depth_col, coord).view(b*hw, 1, -1)
         
-        # (b*w*h, 1, r^2) x (b*w*h, r^2, 1) => (b, 1, h,w)
+        # (b*w*h, 1, r^2) x (b*w*h, r^2, 1) => (b, 1, h, w)
         out = torch.bmm(depth_sampled, weight).view(b, 1, h,w)
 
         if self.residual:

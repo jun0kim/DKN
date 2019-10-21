@@ -23,9 +23,9 @@ parser.add_argument('--d', type=int, default=15, help='size of grid area')
 parser.add_argument('--scale', type=int, default=8, help='scale factor')
 parser.add_argument('--parameter',  default='parameter/FDKN_8x', help='name of parameter file')
 parser.add_argument('--model',  default='FDKN', help='choose model FDKN or DKN')
-parser.add_argument('--lr',  default='0.0001', help='learning rate')
+parser.add_argument('--lr',  default='0.0001', type=float, help='learning rate')
 parser.add_argument('--result',  default='./result', help='learning rate')
-
+parser.add_argument('--epoch',  default=20, type=int, help='max epoch')
 
 opt = parser.parse_args()
 print(opt)
@@ -42,7 +42,7 @@ elif opt.model == 'DKN':
     net = DKN(kernel_size=opt.k, filter_size=opt.d, residual=True).cuda()
     
 criterion = nn.L1Loss()
-optimizer = optim.Adam(net.parameters(), lr=0.0001)
+optimizer = optim.Adam(net.parameters(), lr=opt.lr)
 scheduler = lr_scheduler.StepLR(optimizer, step_size=10000, gamma=0.2)
 net.train()
 
@@ -88,7 +88,7 @@ def validate(net, root_dir='./dataset'):
     
     return rmse
 
-max_epoch = 20
+max_epoch = opt.epoch
 for epoch in range(max_epoch):
     net.train()
     running_loss = 0.0
